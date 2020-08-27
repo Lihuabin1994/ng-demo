@@ -40,7 +40,7 @@ pipeline:
     commands:
       - CI=false npm run build
       - ls
-      - cp dist /usr/share/project/ngdemo
+      - cp -r dist /usr/share/project/ngdemo
     when:
       event: [ push, pull_request ]
       branch: [ master, release, devlopment ]
