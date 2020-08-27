@@ -15,7 +15,7 @@ pipeline:
   #install
   install:
     image: node:12-alpine3.12 #docker image
-    commands:# 命令
+    commands: # 命令
       - rm -rf package-lock.json #删除文件
       - npm install  # 也可以使用 npm install
     when:
