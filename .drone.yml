@@ -51,7 +51,7 @@ pipeline:
       from_secret: ng
     port: 22
     username: root
-    password: Lhb940112
+    password:
       from_secret: ng
     source: build
     rm: true
