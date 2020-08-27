@@ -1,0 +1,60 @@
+pipeline:
+
+  #加载缓存node_modules
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
+    when:
+      event: [ push, pull_request ] # 触发事件类型【push】，【pull_request】
+      branch: [ master, release, devlopment ] # 触发分支
+
+  #install
+  install:
+    image: node:12-alpine3.12 #docker image
+    commands:# 命令
+      - rm -rf package-lock.json #删除文件
+      - npm install  # 也可以使用 npm install
+    when:
+      event: [ push, pull_request ]
+      branch: [ master, release, devlopment ]
+
+  #更新node_modules缓存
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
+    when:
+      event: [ push, pull_request ]
+      branch: [ master, release, devlopment ]
+
+  #build
+  build:
+    image: node:12-alpine3.12
+    commands:
+      - CI=false npm run build
+      - ls
+    when:
+      event: [ push, pull_request ]
+      branch: [ master, release, devlopment ]
+
+  #发布，prod环境
+  deploy-prod:
+    image: appleboy/drone-scp
+    host:
+      from_secret: ng
+    port: 22
+    username: root
+    password: Lhb940112
+      from_secret: ng
+    source: build
+    rm: true
+    when:
+      event: [ push, pull_request ]
+      branch: [ master ]
