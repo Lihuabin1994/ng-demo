@@ -38,9 +38,9 @@ pipeline:
   build:
     image: node:12-alpine3.12
     commands:
-      - CI=false npm run build
+      - CI=false npm run build:prod
       - ls
-      - cp -r dist /usr/share/project/ngdemo
+      - cp -r dist /usr/share/project/ngdemo/
     when:
       event: [ push, pull_request ]
       branch: [ master, release, devlopment ]
