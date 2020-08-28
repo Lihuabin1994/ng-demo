@@ -45,16 +45,16 @@ pipeline:
       branch: [ master, release, devlopment ]
 
   #deploy
-  deploy:
+  deploy-project:
     image: appleboy/drone-scp
-    settings:
-      host: 106.14.58.131
-      username: root
-      password: Lhb940112
-      port: 22
-      target: /usr/share/project/ngdemo
-      source: - dist/*
-      when:
-        event: [ push, pull_request ]
-        branch: [ master, release, devlopment ]
+    host: 106.14.58.131
+    port: 22
+    username: root
+    password: Lhb940112
+    target: /usr/share/project/ngdemo
+    source: - dist/*
+    rm: true
+    when:
+      event: [ push, pull_request ]
+      branch: [ master ]
 
