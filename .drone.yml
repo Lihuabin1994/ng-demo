@@ -52,7 +52,8 @@ pipeline:
     username: root
     password: Lhb940112
     target: /usr/share/project/ngdemo
-    source: - dist/*
+    source:
+      - dist/*
     rm: true
     when:
       event: [ push, pull_request ]
