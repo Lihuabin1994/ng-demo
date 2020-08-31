@@ -40,8 +40,6 @@ pipeline:
     commands:
       - CI=false npm run build:prod
       - ls
-      - cd dist
-      - ls
     when:
       event: [ push, pull_request ]
       branch: [ master, release, devlopment ]
@@ -55,7 +53,7 @@ pipeline:
     password: Lhb940112
     target: /usr/share/project
     source:
-      - ng-demo
+      - dist/ng-demo/*
     rm: true
     when:
       event: [ push, pull_request ]
