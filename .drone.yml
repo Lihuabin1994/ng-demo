@@ -51,9 +51,9 @@ pipeline:
     port: 22
     username: root
     password: Lhb940112
-    target: /usr/share/project/ngdemo
+    target: /usr/share/project
     source:
-      - dist/*
+      - dist/ng-demo/*
     rm: true
     when:
       event: [ push, pull_request ]
